@@ -25,13 +25,12 @@ public class BaseballTeamService {
 		public List<BaseballTeam> showList(){
 			return baseballTeamRepository.findAll();	
 		}
-		
 		/**
 		 * @param id　球団ID
 		 * @return　球団詳細情報
 		 */
-		public BaseballTeam showDetail(Integer id) {
-			return baseballTeamRepository.load(id);
+		public BaseballTeam showDetail(Integer price) {
+			return baseballTeamRepository.load(price);
 		}	
 }
 

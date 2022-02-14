@@ -1,0 +1,30 @@
+package com.example.service;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.example.domain.Hotels;
+import com.example.repository.HotelsRepository;
+/**
+ * @author akitakazuki
+ *ホテル情報を操作するサービスクラス
+ */
+@Service
+public class HotelsService {
+		@Autowired
+		private HotelsRepository hotelsRepository;
+		/**
+		 * ホテル情報をすべて取得
+		 * @return　全ホテル一覧
+		 */
+		public List<Hotels> showList(){
+			return hotelsRepository.findAll();	
+		}
+		/**
+		 * @param id　ホテルID
+		 * @return　金額条件の検索リスト
+		 */
+		public Hotels findByPrice(Integer price) {
+			return hotelsRepository.load(price);
+		}	
+}
