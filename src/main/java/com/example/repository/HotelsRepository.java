@@ -38,7 +38,7 @@ public class HotelsRepository {
 	 * @return　全ホテル情報を取得
 	 */
 	public List<Hotels>findAll(){
-		String sql = "select * from hotels order by id asc";
+		String sql = "select * from hotels order by price desc";
 		List<Hotels> hotelsList= template.query(sql,HOTELS_ROW_MAPPER);
 		return hotelsList;
 	}
@@ -48,11 +48,10 @@ public class HotelsRepository {
 	 * @param 検索したいホテルid
 	 * @return　検索されたホテル情報
 	 */
-	public Hotels load(Integer price) {
-		String sql = "select * from hotels where price =: price";
-		
-		SqlParameterSource param = new MapSqlParameterSource().addValue("price", price);
-		Hotels hotels = template.queryForObject(sql, param, HOTELS_ROW_MAPPER);
+	public List<Hotels> findByPrice(Integer price) {
+		String sql = "select * from hotels where price <= :price order by price desc";
+		SqlParameterSource param = new MapSqlParameterSource().addValue("price",price);
+		List<Hotels> hotels = template.query(sql, param, HOTELS_ROW_MAPPER);
 		return hotels;
 	}
 }

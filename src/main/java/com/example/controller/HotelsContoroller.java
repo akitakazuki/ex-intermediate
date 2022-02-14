@@ -26,15 +26,14 @@ public class HotelsContoroller {
 	 * @return 検索後のホテル情報
 	 */
  	@RequestMapping("/search")
- 	public String search(String price,Model model) {
- 		if(price.equals("")) {
+ 	public String search(Integer price,Model model) {
+ 		if(price==null) {
  			List<Hotels> hotelsList = service.showList();
  	 		model.addAttribute("hotelsList",hotelsList);
- 	 		return "ex2/hotels";
  		}else {
- 	 		Hotels hotels = service.findByPrice(Integer.parseInt(price));
+ 	 		List<Hotels> hotels = service.showFindList(price);
  			model.addAttribute("hotels",hotels);
- 			return "ex2/hotels";
  		}
+ 		return "ex2/hotels";
  	}
 }

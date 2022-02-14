@@ -22,9 +22,9 @@ public class HotelsService {
 		}
 		/**
 		 * @param id　ホテルID
-		 * @return　金額条件の検索リスト
+		 * @return　条件(金額)の検索リスト
 		 */
-		public Hotels findByPrice(Integer price) {
-			return hotelsRepository.load(price);
+		public List<Hotels> showFindList(Integer price) {
+			return hotelsRepository.findByPrice(price);
 		}	
 }
