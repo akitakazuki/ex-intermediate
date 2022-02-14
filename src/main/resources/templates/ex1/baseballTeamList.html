@@ -5,11 +5,10 @@
 <title>野球チーム一覧</title>
 </head>
 <body>
-<h5>野球チーム一覧</h5>
-
-<div th:each="baseballTeam:${baseballTeamList}">
-	<a href="baseballTeamDetail.html" th:href="@{/baseballTeam/showDetail?id=}+${team.id}"
-		th:text="${baseballTeam.name}">読売ジャイアンツ</a><br>
+<h3>野球チーム一覧</h3>
+<div th:each="baseballTeam : ${baseballTeamList}">
+	<a th:text="${baseballTeam.teamName}" 
+		th:href="@{/baseballTeam/showDetail?id=}+${baseballTeam.id}">読売ジャイアンツ</a><br>
 </div>
 </body>
 </html>

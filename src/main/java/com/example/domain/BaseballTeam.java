@@ -1,12 +1,12 @@
 package com.example.domain;
 
 public class BaseballTeam {
-	private Integer id;
-	private String leagueName;
-	private String teamName;
-	private String headquarters;
-	private String inauguration;
-	private String history;
+	private Integer id; //球団ID
+	private String leagueName; //リーグ名
+	private String teamName; //球団名
+	private String headquarters; //本拠地
+	private String inauguration; //発足
+	private String history; //歴史
 	
 	
 	public Integer getId() {

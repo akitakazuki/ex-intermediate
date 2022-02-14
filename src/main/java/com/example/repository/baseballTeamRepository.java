@@ -4,69 +4,49 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.stereotype.Repository;
 
 import com.example.domain.BaseballTeam;
-
-import jp.co.sample.domain.Employee;
-
-public class baseballTeamRepository {
-	private static final RowMapper<BaseballTeam> EMPLOYEE_ROW_MAPPER=(rs,i)->{
-		BaseballTeam employee =new BaseballTeam();
-		employee.setId(rs.getInt("id"));
-		employee.setLeagueName(rs.getString("league_name"));
-		employee.setteamName(rs.getString("team_name"));
-		employee.setHeadquarters(rs.getString("headquarters"));
-		employee.setInauguration(rs.getString("inauguration"));
-		employee.setHistory(rs.getString("history"));
-		
-		
-		return employee;
+@Repository
+public class BaseballTeamRepository {
+	
+	
+	private static final RowMapper<BaseballTeam> BASEBALLTEAM_ROW_MAPPER=(rs,i)->{
+		BaseballTeam baseballTeam =new BaseballTeam();
+		baseballTeam.setId(rs.getInt("id"));
+		baseballTeam.setLeagueName(rs.getString("league_name"));
+		baseballTeam.setTeamName(rs.getString("team_name"));
+		baseballTeam.setHeadquarters(rs.getString("headquarters"));
+		baseballTeam.setInauguration(rs.getString("inauguration"));
+		baseballTeam.setHistory(rs.getString("history"));
+		return baseballTeam;
 	};
 	
 	@Autowired
 	private NamedParameterJdbcTemplate template;
 
 	/**
-	 * @return　全従業員リスト
+	 * @return　全球団リスト
 	 */
-	public List<Employee>findAll(){
-		String sql = "select * from employees order by hire_date asc";
-		List<Employee> employeeList= template.query(sql,EMPLOYEE_ROW_MAPPER);
-		return employeeList;
+	public List<BaseballTeam>findAll(){
+		String sql = "select * from teams order by inauguration asc";
+		List<BaseballTeam> baseballTeamList= template.query(sql,BASEBALLTEAM_ROW_MAPPER);
+		return baseballTeamList;
 	}
 	
 	/**
 	 * 主キー検索を行う
 	 * @param id
-	 * @return　検索された従業員情報
+	 * @return　検索された球団情報
 	 */
-	public Employee load(Integer id) {
-		String sql = "select * from employees where id=:id";
+	public BaseballTeam load(Integer id) {
+		String sql = "select * from teams where id=:id";
 		
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
-		Employee employee = template.queryForObject(sql, param, EMPLOYEE_ROW_MAPPER);
-		return employee;
+		BaseballTeam baseballTeam = template.queryForObject(sql, param, BASEBALLTEAM_ROW_MAPPER);
+		return baseballTeam;
 	}
-	
-	/**
-	 * 渡した登録情報を更新する
-	 * @param employee　従業員情報
-	 */
-	public void update(Employee employee) {
-		SqlParameterSource param = new BeanPropertySqlParameterSource(employee);
-		
-		String updatesql = "update employees set name=:name,image=:image,"
-				+ "gender=:gender,hire_date=:hireDate,mail_address=:mailAddress,"
-				+ "zip_code=:zipCode,address=:address,telephone=:telephone,"
-				+ "salary=:salary,characteristics=:characteristics,dependents_count=:dependentsCount"
-				+ " where id=:id";
-		template.update(updatesql, param);
-	}
-	
-}
-
 }
