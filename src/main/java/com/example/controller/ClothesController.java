@@ -24,6 +24,9 @@ public class ClothesController {
 	public String search(Integer gender,String color,Model model) {
 		List <Clothes> clothesList = service.showClothes(gender, color);
 				model.addAttribute("clothesList",clothesList);
+				
+//				model.addAttribute("searchGender", gender);
+//				model.addAttribute("searchColor", color);
 		return "ex3/clothes";
 	}
 }
