@@ -29,11 +29,12 @@ public class HotelsContoroller {
  	public String search(Integer price,Model model) {
  		if(price==null) {
  			List<Hotels> hotelsList = service.showList();
- 	 		model.addAttribute("hotelsList",hotelsList);
+ 	 		model.addAttribute("hotels",hotelsList);
  		}else {
  	 		List<Hotels> hotels = service.showFindList(price);
  			model.addAttribute("hotels",hotels);
  		}
+ 		model.addAttribute("searchPrice",price);
  		return "ex2/hotels";
  	}
 }

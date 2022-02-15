@@ -21,8 +21,8 @@ public class ClothesController {
 		return "ex3/clothes";
 	}
 	@RequestMapping("/search")
-	public String search(Integer gernder,String color,Model model) {
-		List <Clothes> clothesList = service.showClothes(gernder, color);
+	public String search(Integer gender,String color,Model model) {
+		List <Clothes> clothesList = service.showClothes(gender, color);
 				model.addAttribute("clothesList",clothesList);
 		return "ex3/clothes";
 	}

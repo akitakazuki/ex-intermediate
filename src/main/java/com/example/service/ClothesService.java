@@ -20,7 +20,6 @@ public class ClothesService {
 	 */
 	public List<Clothes> showClothes(Integer gender,String color){
 		return repositry.findByClothes(gender, color);
-		
 	}
 	
 }

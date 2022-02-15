@@ -7,25 +7,10 @@
 <body>
 <form th:action="@{/hotels/search}" method="post">
 <h3>ホテル検索</h3>
-<input type="text" name="price" >円以下<br>
+<input type="text" name="price" th:value="${searchPrice}" >円以下<br>
 <button>検索</button>
 <br>
 <table border=1 th:each="hotel:${hotels}">
-	<tr>
-		<th>ホテル名</th>
-		<td th:text="${hotel.hotelName}">dummy</td>
-	</tr>
-	<tr>
-		<th>最寄駅</th>
-		<td th:text="${hotel.nearestStation}">dummy</td>
-	</tr>
-	<tr>
-		<th>価格</th>
-		<td th:text="${#numbers.formatInteger(hotel.price,2,'COMMA')}">dummy</td>
-	</tr>
-</table>
-
-<table border=1 th:if="${price == null}" th:each="hotel:${hotelsList}">
 	<tr>
 		<th>ホテル名</th>
 		<td th:text="${hotel.hotelName}">dummy</td>
